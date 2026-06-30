@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 30" fill="none">
+    <g opacity="0.85">
+      <path d="M15 7a8 8 0 00-7 11.9L7 23l4.2-.9A8 8 0 1015 7z" stroke="#FFF" stroke-width="2" fill="none"/>
+      <text x="32" y="21" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="16" fill="#FFF">WhatsApp</text>
+    </g>
+  </svg>

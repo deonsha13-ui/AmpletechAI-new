@@ -618,7 +618,7 @@ body {
 
 /* Hide default Framer background video inside Hero to show our custom looping local video, but keep the premium cinematic overlay and patterns fully visible */
 body [data-framer-name="Hero"] .framer-1a1gkfi .framer-c7469o-container {
-  opacity: 1 !important;
+  opacity: 0 !important;
   pointer-events: none !important;
 }
 
@@ -2419,46 +2419,4 @@ div[class*="qba5n6-container"],
 /* ── Case study detail page — prevent hero image from bleeding over footer ── */
 .framer-1lxzeft {
   overflow: hidden !important;
-}
-
-
-/* --- SKELETON LOADING --- */
-.amp-skeleton-card {
-    position: relative;
-    overflow: hidden;
-    background-color: var(--token-3ee0f1ea-bf0c-4338-a648-3fc779ce08bb, rgb(44, 44, 44)) !important;
-    border-color: var(--token-1a0abee7-397d-4863-a181-709f5463ebcd, rgba(255, 255, 255, 0.1)) !important;
-    pointer-events: none;
-    border-radius: inherit;
-    /* Ensure the card has a background to show the shimmer */
-}
-
-/* Hide children but keep layout space */
-.amp-skeleton-card > * {
-    opacity: 0 !important;
-}
-
-.amp-skeleton-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
-    background-size: 200% 100%;
-    animation: amp-shimmer 1.5s infinite linear;
-    z-index: 10;
-    pointer-events: none;
-}
-
-@keyframes amp-shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-}
-
-.amp-loaded {
-    animation: amp-fadeIn 0.5s ease-out forwards;
-}
-
-@keyframes amp-fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
 }

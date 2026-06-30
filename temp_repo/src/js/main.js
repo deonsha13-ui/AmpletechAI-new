@@ -99,14 +99,13 @@ const MENU_LINKS = [
 ];
 
 function init() {
-    initHeroCanvas();
-    initSkeletonLoading();
     assignSectionIds();
     unlockHiddenElements();
     buildAndInjectMenu();
     wireHamburger();
     initBentoSpotlight();
     initAmbientGlowBlobs();
+    initHeroCanvas();
 
     // Inject accordion HTML at all screen sizes (mobile gets stacked layout via CSS)
     // MUST BE RUN BEFORE GSAP to allow ScrollTrigger querying to succeed
@@ -128,8 +127,6 @@ function init() {
                 mm.add("(min-width: 1200px)", () => {
                     initAboutScattering();
                 });
-                
-                initTextHighlight();
 
                 // Refresh ScrollTrigger to ensure all layout offsets are accurate
                 ScrollTrigger.refresh();
@@ -153,10 +150,10 @@ function init() {
     // Initialize MutationObserver to intercept branding, images, and counters
     // Delayed until after window load + 500ms to prevent React hydration mismatch crashes
     if (document.readyState === 'complete') {
-        setTimeout(() => { initRuntimeInterceptors(); }, 500);
+        setTimeout(initRuntimeInterceptors, 500);
     } else {
         window.addEventListener('load', () => {
-            setTimeout(() => { initRuntimeInterceptors(); }, 500);
+            setTimeout(initRuntimeInterceptors, 500);
         });
     }
 
@@ -223,113 +220,51 @@ function initHeroCanvas() {
     const hero = document.querySelector('section.framer-17rykba[data-framer-name="Hero"]');
     if (!hero) return;
 
-    // Remove legacy custom video if exists to avoid double layering/artifacts
-    const oldCustomVid = document.getElementById('ampletechai-hero-video');
-    if (oldCustomVid) {
-        oldCustomVid.remove();
-        console.log('[AmpleAI] Removed legacy custom video element');
+    // Check if video is already statically injected in index.html to avoid duplicates
+    const existingVid = document.getElementById('ampleai-hero-video');
+    if (existingVid) {
+        existingVid.play().catch(() => console.log('[AmpleAI] Autoplay deferred'));
+        console.log('[AmpleAI] ✓ Existing hero video found and playing');
+        return;
     }
 
-    // Find the original video element inside BG Item and update its source inline
-    const framerBg = hero.querySelector('[data-framer-name="BG Item"]');
-    if (framerBg) {
-        // Ensure BG Item is fully visible to keep its layout, overlays, and patterns intact
-        framerBg.style.display = "";
-        framerBg.style.opacity = "1";
-        framerBg.style.visibility = "visible";
+    // STEP 2: Create the video element (fallback if not in HTML)
+    const vid = document.createElement('video');
+    vid.id = 'ampleai-hero-video';
+    vid.autoplay = true;
+    vid.muted = true;
+    vid.loop = true;
+    vid.playsInline = true;
+    vid.setAttribute('aria-hidden', 'true');
 
-        const originalVid = framerBg.querySelector('video') || document.getElementById('ampletechai-hero-video-element');
-        if (originalVid && !originalVid.__intercepted) {
-            originalVid.__intercepted = true;
-            console.log('[AmpleAI] Initializing bulletproof interception on Hero video element');
+    const src = document.createElement('source');
+    src.src = '/hero-bg.mp4';
+    src.type = 'video/mp4';
+    vid.appendChild(src);
 
-            // Force initial required properties
-            originalVid.src = '/hero-bg.mp4';
-            originalVid.preload = 'auto';
-            originalVid.autoplay = true;
-            originalVid.muted = true;
-            originalVid.loop = true;
-            originalVid.playsInline = true;
-            originalVid.removeAttribute('poster');
+    // STEP 3: Position BEHIND all Framer content (z-index: 0)
+    // Framer's content divs naturally stack above at higher z-index
+    Object.assign(vid.style, {
+        position:       'absolute',
+        top:            '0',
+        left:           '0',
+        width:          '100%',
+        height:         '100%',
+        objectFit:      'cover',
+        objectPosition: 'center',
+        zIndex:         '0',       // behind Framer content, above section bg color
+        pointerEvents:  'none',
+        opacity:        '1',       // full opacity — no double-layering now
+    });
 
-            // Override setAttribute to reject any external attempts to reset src/poster
-            const originalSetAttribute = originalVid.setAttribute;
-            originalVid.setAttribute = function(name, value) {
-                if (name === 'src' && value !== '/hero-bg.mp4') {
-                    console.log('[AmpleAI] Blocked attempt to change video attribute src to:', value);
-                    return originalSetAttribute.call(this, name, '/hero-bg.mp4');
-                }
-                if (name === 'poster') {
-                    // Do not allow setting any poster image which might block the playing video
-                    return;
-                }
-                return originalSetAttribute.call(this, name, value);
-            };
+    // Make hero relatively positioned
+    if (getComputedStyle(hero).position === 'static') hero.style.position = 'relative';
 
-            // Override src property with getter/setter to prevent React property overrides
-            let currentSrc = '/hero-bg.mp4';
-            Object.defineProperty(originalVid, 'src', {
-                get() {
-                    return currentSrc;
-                },
-                set(val) {
-                    if (val !== '/hero-bg.mp4') {
-                        console.log('[AmpleAI] Blocked property assignment src to:', val);
-                        val = '/hero-bg.mp4';
-                    }
-                    currentSrc = val;
-                    const nativeSrcDescriptor = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'src');
-                    if (nativeSrcDescriptor && nativeSrcDescriptor.set) {
-                        nativeSrcDescriptor.set.call(this, val);
-                    }
-                },
-                configurable: true
-            });
+    // Insert as FIRST child so Framer content is naturally above it
+    hero.insertBefore(vid, hero.firstChild);
 
-            // Override poster property to always return empty string
-            Object.defineProperty(originalVid, 'poster', {
-                get() {
-                    return '';
-                },
-                set(val) {
-                    // No-op
-                },
-                configurable: true
-            });
-
-            // Call load and play
-            originalVid.load();
-            originalVid.play().catch((err) => {
-                console.log('[AmpleAI] Autoplay play() was deferred/blocked, setting up fallback triggers:', err.message);
-                
-                const playOnInteraction = () => {
-                    if (originalVid.paused) {
-                        originalVid.play().then(() => {
-                            console.log('[AmpleAI] Video play() succeeded via user interaction!');
-                            cleanup();
-                        }).catch(() => {});
-                    } else {
-                        cleanup();
-                    }
-                };
-                
-                const cleanup = () => {
-                    window.removeEventListener('click', playOnInteraction);
-                    window.removeEventListener('touchstart', playOnInteraction);
-                    window.removeEventListener('scroll', playOnInteraction);
-                };
-                
-                window.addEventListener('click', playOnInteraction);
-                window.addEventListener('touchstart', playOnInteraction);
-                window.addEventListener('scroll', playOnInteraction);
-            });
-        } else if (originalVid) {
-            // If already intercepted, just make sure it stays playing if it got paused
-            if (originalVid.paused) {
-                originalVid.play().catch(() => {});
-            }
-        }
-    }
+    vid.play().catch(() => console.log('[AmpleAI] Autoplay deferred'));
+    console.log('[AmpleAI] ✓ Hero video injected, Framer BG hidden');
 }
 
 
@@ -1107,7 +1042,7 @@ function updateKochiClock() {
     const clocks = document.querySelectorAll('[data-code-component-plugin-id="84d4c1"]');
     clocks.forEach(el => {
         const text = el.textContent.trim();
-        if (/\b\d{1,2}:\d{2}\s*(?:AM|PM)?\b/i.test(text)) {
+        if (text.includes('AM') || text.includes('PM') || text.includes(':')) {
             const kochiTime = new Date(new Date().getTime() + (5.5 * 60 * 60 * 1000) + (new Date().getTimezoneOffset() * 60 * 1000));
             const dayName = kochiTime.toLocaleDateString('en-US', { weekday: 'long' });
             let hours = kochiTime.getHours();
@@ -1230,7 +1165,6 @@ function moveStatsBelowAccordion() {
 
 function initRuntimeInterceptors() {
     // Run initial scan
-    initHeroCanvas();
     moveStatsBelowAccordion();
     ensureGradientBeam();
     fixStatsCounters();
@@ -1247,7 +1181,6 @@ function initRuntimeInterceptors() {
     const retryDelays = [500, 1500, 3000, 5000];
     retryDelays.forEach(delay => {
         setTimeout(() => {
-            initHeroCanvas();
             moveStatsBelowAccordion();
             ensureGradientBeam();
             const patched = fixStatsCounters();
@@ -1270,7 +1203,6 @@ function initRuntimeInterceptors() {
         
         applyCardHoverClasses();
         patchPricingSection();
-        initHeroCanvas();
         moveStatsBelowAccordion();
         ensureGradientBeam();
         fixStatsCounters();
@@ -1356,9 +1288,9 @@ function patchTestimonialsSection() {
             const avatarImg = card.querySelector('img[alt="Avatar"]') ||
                               card.querySelector('[data-framer-name="Top"] img');
             if (avatarImg) {
-                avatarImg.src = 'https://images.unsplash.com/photo-1546776310-eef45dd6d63c?auto=format&fit=crop&q=80&w=200';
+                avatarImg.src = '/assets/nevis-avatar.png';
                 avatarImg.srcset = '';
-                avatarImg.alt = 'Robotic arm avatar';
+                avatarImg.alt = 'Nevis, Co-Founder of Lumothrive';
             }
 
             const logoImg = card.querySelector('img[alt="Logo"]') ||
@@ -1531,59 +1463,4 @@ function patchPricingSection() {
     setTimeout(apply, 1000);
     setTimeout(apply, 2000);
     setTimeout(apply, 3500);
-}
-
-function initTextHighlight() {
-    if (!window.gsap || !window.ScrollTrigger) return;
-    
-    // Find all paragraphs matching our text pattern, being careful with &nbsp;
-    const paragraphs = Array.from(document.querySelectorAll('p')).filter(p => {
-        const text = p.textContent.toUpperCase().replace(/[\s\xA0]+/g, ' ').trim();
-        return text.includes('BUSINESSES INTEGRATE') || text.includes('CORE STRATEGIES');
-    });
-
-    if (paragraphs.length === 0) return;
-
-    paragraphs.forEach(p => {
-        // Find innermost spans that actually contain text
-        const spans = Array.from(p.querySelectorAll('span')).filter(s => s.children.length === 0 && s.textContent.trim().length > 0);
-        if (spans.length === 0) return;
-
-        // GSAP scroll trigger for text color
-        gsap.to(spans, {
-            color: '#ffffff',
-            stagger: 0.1,
-            ease: "none",
-            scrollTrigger: {
-                trigger: p,
-                start: "top 80%",
-                end: "bottom 40%",
-                scrub: 1,
-                invalidateOnRefresh: true
-            }
-        });
-    });
-}
-
-
-/* ─────────────────────────────────────────────────────────
-   SKELETON LOADING
-   ───────────────────────────────────────────────────────── */
-function initSkeletonLoading() {
-    const projectCards = document.querySelectorAll('a[href*="/case-studies/"]');
-    
-    if (projectCards.length === 0) return;
-
-    // Apply loading state immediately
-    projectCards.forEach(card => {
-        card.classList.add('amp-skeleton-card');
-    });
-
-    // Simulate fetch delay
-    setTimeout(() => {
-        projectCards.forEach(card => {
-            card.classList.remove('amp-skeleton-card');
-            card.classList.add('amp-loaded');
-        });
-    }, 1200);
 }
