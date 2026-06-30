@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 30" fill="none">
+    <g opacity="0.85">
+      <circle cx="9" cy="15" r="3" fill="#FFF"/>
+      <circle cx="21" cy="9" r="3" fill="#FFF"/>
+      <circle cx="21" cy="21" r="3" fill="#FFF"/>
+      <path d="M9 15l12-6M9 15l12 6" stroke="#FFF" stroke-width="1.5"/>
+      <text x="34" y="21" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="16" fill="#FFF">n8n</text>
+    </g>
+  </svg>

@@ -1,0 +1,22 @@
+{
+  "name": "ampleai-website",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 3000",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "echo 'No linting required'"
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1",
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "framer-motion": "^12.40.0",
+    "three": "^0.184.0",
+    "ws": "^8.21.0"
+  }
+}

@@ -1,0 +1,2510 @@
+/* Consolidated Framer Styles for AmpleAI */
+:root {
+  /* Branding Custom variables overrides to swap colors */
+  --token-53ac5080-809d-430f-8c22-cd6ed2fb990c: #080808 !important; /* SLEEK MATTE BLACK */
+
+  /* Animation timing tokens */
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-expo:    cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Full-width Page Layout */
+html {
+  background-color: #080808 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+}
+
+body {
+  background-color: #080808 !important;
+  background: #080808 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important; /* Allow sticky positioning inside body */
+}
+
+/* Classy custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #080808;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  border: 2px solid #080808;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Drifting Ambient Glow Blobs */
+.ambient-glow-blob {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 153, 255, 0.04) 0%, transparent 70%);
+  filter: blur(90px);
+  z-index: -1;
+  pointer-events: none;
+  animation: drift 25s infinite alternate ease-in-out;
+}
+.blob-1 { top: -10%; left: -10%; }
+.blob-2 { bottom: -10%; right: -10%; animation-delay: -5s; }
+
+@keyframes drift {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(120px, 90px) scale(1.15); }
+  100% { transform: translate(-60px, -50px) scale(0.9); }
+}
+
+/* Ensure light text on swapped dark background sections (scoped strictly to About section) */
+[data-framer-name="About"] .framer-59ra2k,
+[data-framer-name="About"] .framer-8qcnhv,
+[data-framer-name="About"] .framer-qf5gfv {
+  --extracted-r6o4lv: #f1f1f1 !important;
+  --framer-text-color: #f1f1f1 !important;
+}
+
+[data-framer-name="About"] .framer-59ra2k h2, [data-framer-name="About"] .framer-59ra2k h3, [data-framer-name="About"] .framer-59ra2k p, [data-framer-name="About"] .framer-59ra2k span,
+[data-framer-name="About"] .framer-8qcnhv h2, [data-framer-name="About"] .framer-8qcnhv h3, [data-framer-name="About"] .framer-8qcnhv p, [data-framer-name="About"] .framer-8qcnhv span,
+[data-framer-name="About"] .framer-qf5gfv h2, [data-framer-name="About"] .framer-qf5gfv h3, [data-framer-name="About"] .framer-qf5gfv p, [data-framer-name="About"] .framer-qf5gfv span {
+  color: #f1f1f1 !important;
+  --extracted-r6o4lv: #f1f1f1 !important;
+  --framer-text-color: #f1f1f1 !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PREMIUM SCOPED OVERRIDES (100% Layout Pollution Proof)
+   Scoped strictly using data-framer-name attributes to guarantee
+   zero interference with Case Studies, Why Choose, or other sections.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Scope strictly to the About Section */
+[data-framer-name="About"] {
+  background-color: #080808 !important;
+  background: #080808 !important;
+  z-index: 5 !important;
+  overflow: visible !important; /* Prevent horizontal cutting off of text */
+}
+
+@media (min-width: 1200px) {
+  body [data-framer-name="About"] .ample-about-container {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    max-width: 1460px !important;
+    gap: 40px !important;
+    position: relative !important;
+    height: 100vh !important;
+    padding: 0 50px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Force the intermediate Framer grid wrapper to fit perfectly without height bloat or overflows */
+  body [data-framer-name="About"] .framer-wr60eh {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-template-rows: auto !important;
+    gap: 40px !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: unset !important;
+    position: relative !important;
+  }
+
+  /* Corrected combined selector for the Left Text column */
+  body [data-framer-name="About"] .ample-about-left {
+    flex: 38 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    z-index: 10 !important;
+    position: relative !important;
+    height: auto !important;
+    gap: 30px !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+
+  /* Center Amanda Reed card sticky anchor */
+  body [data-framer-name="About"] .ample-card-center {
+    flex: 27 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: 480px !important;
+    position: relative !important;
+    z-index: 10 !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    display: flex !important;
+  }
+
+  /* Corrected combined selector for the Right bullet list */
+  body [data-framer-name="About"] .ample-about-right {
+    flex: 35 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    position: relative !important;
+    z-index: 5 !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  /* Neutralize the Bottom container framer-pjvwl so it overlays absolute */
+  body [data-framer-name="About"] .framer-pjvwl {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+  }
+
+  /* Style all scatter cards stacked behind the center Amanda card - HIDDEN AT LOAD with !important */
+  body [data-framer-name="About"] .ample-card-scatter {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 300px !important;
+    height: 420px !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    display: flex !important;
+  }
+  
+  body [data-framer-name="About"] .ample-card-scatter.amp-active {
+    pointer-events: auto !important;
+  }
+}
+
+/* Responsive Collapse for About Section under 1200px */
+@media (max-width: 1199.98px) {
+  body [data-framer-name="About"] .ample-about-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 40px !important;
+    height: auto !important;
+    padding: 60px 24px !important;
+  }
+  body [data-framer-name="About"] .ample-about-left {
+    width: 100% !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+  body [data-framer-name="About"] .ample-card-center {
+    width: 100% !important;
+    height: auto !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+  body [data-framer-name="About"] .ample-about-right {
+    width: 100% !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+  body [data-framer-name="About"] .ample-card-scatter {
+    display: none !important; /* Hide scatter visuals on mobile collapses */
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   SERVICES SECTION — Custom Accordion (Clean, Framer-independent)
+   ═══════════════════════════════════════════════════════════ */
+
+/* Section background: off-white matching Altrion screenshot */
+[data-framer-name="Services"] {
+  background-color: #f5f5f5 !important;
+  background: #f5f5f5 !important;
+  color: #0d0d0d !important;
+  z-index: 5 !important;
+}
+
+/* Ensure Framer native headers outside our accordion remain dark */
+[data-framer-name="Services"] h2:not(.as-wrapper *),
+[data-framer-name="Services"] h3:not(.as-wrapper *),
+[data-framer-name="Services"] p:not(.as-wrapper *),
+[data-framer-name="Services"] span:not(.as-wrapper *) {
+  --framer-text-color: #0d0d0d !important;
+  color: #0d0d0d !important;
+}
+
+/* Hide original Framer desktop services grid on ≥1200px — we replace it */
+@media (min-width: 1200px) {
+  body [data-framer-name="Services"] .ample-services-desktop {
+    display: none !important;
+  }
+}
+
+/* ── Custom Accordion Wrapper ─────────────────────────── */
+.as-wrapper {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+/* ── Accordion Track ──────────────────────────────────── */
+.as-track {
+  display: flex;
+  flex-direction: row;
+  height: 600px;
+  overflow: hidden;
+  border: 1px solid rgba(13, 13, 13, 0.08);
+  border-radius: 12px;
+  background: #f5f5f5;
+}
+
+/* ── Single Panel ─────────────────────────────────────── */
+.as-panel {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 30px;
+  border-right: 1px solid rgba(13, 13, 13, 0.08);
+  cursor: pointer;
+  background: #f5f5f5;
+  transition: flex 0.65s cubic-bezier(0.25, 1, 0.3, 1), background 0.65s cubic-bezier(0.25, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.as-panel:last-child {
+  border-right: none;
+}
+
+.as-panel.as-active {
+  flex: 3;
+  cursor: default;
+}
+
+/* ── Panel Background Image & Overlay ─────────────────── */
+.as-panel-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  z-index: 0;
+  transition: opacity 0.65s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.as-panel.as-active .as-panel-bg {
+  opacity: 1;
+}
+
+.as-panel-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 0.65s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.as-panel.as-active .as-panel-overlay {
+  opacity: 1;
+}
+
+/* ── Panel Content Container ──────────────────────────── */
+.as-panel-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  pointer-events: none;
+}
+
+/* ── Panel Number (top left) ─────────────────────────── */
+.as-panel-num {
+  font-family: 'Geist', 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(13, 13, 13, 0.4);
+  letter-spacing: 0.05em;
+  transition: color 0.65s cubic-bezier(0.25, 1, 0.3, 1);
+  text-align: left;
+}
+
+.as-panel.as-active .as-panel-num {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* ── Panel Collapsed Title (bottom left, horizontal) ── */
+.as-collapsed-title {
+  font-family: 'TASA Orbiter', 'Geist', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0d0d0d;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.3, 1), transform 0.4s cubic-bezier(0.25, 1, 0.3, 1);
+  text-align: left;
+}
+
+.as-panel.as-active .as-collapsed-title {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* ── Panel Expanded Top content ───────────────────────── */
+.as-panel-expanded-top {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.3, 1) 0.1s, transform 0.5s cubic-bezier(0.25, 1, 0.3, 1) 0.1s;
+}
+
+.as-panel.as-active .as-panel-expanded-top {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.as-expanded-title {
+  font-family: 'TASA Orbiter', 'Geist', sans-serif;
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 800;
+  color: #ffffff !important;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin: 12px 0 4px 0;
+  text-align: left;
+}
+
+.as-desc {
+  font-family: 'Geist', 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7) !important;
+  max-width: 320px;
+  text-align: left;
+}
+
+/* ── Panel Expanded Bottom content ────────────────────── */
+.as-panel-expanded-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.3, 1) 0.15s, transform 0.5s cubic-bezier(0.25, 1, 0.3, 1) 0.15s;
+}
+
+.as-panel.as-active .as-panel-expanded-bottom {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.as-includes-label {
+  font-family: 'Geist', 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.5) !important;
+  text-align: left;
+}
+
+.as-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.as-pill {
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  font-family: 'Geist', 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+
+/* ── CTA Panel (Column 5) ─────────────────────────────── */
+.as-panel.as-cta {
+  flex: 1.1;
+  background: #080808;
+  cursor: default;
+  border-right: none;
+  justify-content: space-between;
+}
+
+.as-panel.as-cta .as-panel-content {
+  pointer-events: auto;
+}
+
+.as-cta-logo {
+  font-family: 'TASA Orbiter', 'Geist', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff !important;
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+
+.as-cta-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.as-cta-heading {
+  font-family: 'TASA Orbiter', 'Geist', sans-serif;
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-weight: 800;
+  color: #ffffff !important;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  text-align: left;
+}
+
+.as-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 24px;
+  background: #ffffff;
+  color: #080808 !important;
+  border-radius: 6px;
+  font-family: 'Geist', 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: background 0.2s, transform 0.2s;
+  box-sizing: border-box;
+}
+
+.as-cta-btn:hover {
+  background: #f1f1f1;
+}
+
+.as-cta-btn svg {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+  stroke: #080808;
+}
+
+/* ── Mobile: stack vertically ─────────────────────────── */
+@media (max-width: 1199.98px) {
+  .as-wrapper {
+    padding: 0 20px;
+  }
+
+  .as-track {
+    flex-direction: column;
+    height: auto;
+    border-radius: 12px;
+    background: #f5f5f5;
+  }
+
+  .as-panel {
+    flex: none !important;
+    width: 100%;
+    min-height: 80px;
+    padding: 24px 20px;
+    border-right: none;
+    border-bottom: 1px solid rgba(13, 13, 13, 0.08);
+    background: #f5f5f5;
+  }
+
+  .as-panel:last-child {
+    border-bottom: none;
+  }
+
+  .as-panel.as-active {
+    min-height: auto;
+    padding: 30px 20px;
+    background: #000;
+  }
+
+  .as-panel-content {
+    pointer-events: auto;
+  }
+
+  /* Display side by side when collapsed on mobile */
+  .as-panel:not(.as-active) .as-panel-content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+  }
+
+  .as-panel:not(.as-active) .as-panel-num {
+    flex-shrink: 0;
+  }
+
+  .as-panel:not(.as-active) .as-collapsed-title {
+    position: static;
+    font-size: 15px;
+    color: #0d0d0d;
+    white-space: normal;
+  }
+
+  .as-panel.as-active .as-collapsed-title {
+    display: none;
+  }
+
+  .as-panel.as-active .as-panel-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .as-panel.as-active .as-panel-expanded-top,
+  .as-panel.as-active .as-panel-expanded-bottom {
+    transform: none;
+  }
+
+  .as-panel.as-cta {
+    min-height: 250px;
+    gap: 30px;
+  }
+
+  .as-panel.as-cta .as-panel-content {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+  }
+}
+
+/* Style the hero looping local video background, keeping the premium cinematic overlay and patterns fully integrated */
+body [data-framer-name="Hero"] .framer-1a1gkfi .framer-c7469o-container {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+  display: block !important;
+}
+
+body [data-framer-name="Hero"] .framer-1a1gkfi .framer-c7469o-container video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+body [data-framer-name="Hero"] .framer-1a1gkfi .framer-1r3xoou {
+  z-index: 0 !important;
+  opacity: 0.15 !important; /* Keep fallback image subtle under the video */
+}
+
+body [data-framer-name="Hero"] .framer-1a1gkfi .framer-t71k36 {
+  z-index: 2 !important;
+  pointer-events: none !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   AMPLEAI MENU — Full-screen split layout matching Altrion
+   Left: giant nav links | Right: info panel
+   ══════════════════════════════════════════════════════════════ */
+
+#ampleai-menu-drawer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #080808;
+}
+
+body.ampleai-menu-open {
+  overflow: hidden;
+}
+
+/* ── Top bar ───────────────────────────────────────────── */
+#ampleai-menu-topbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  z-index: 2;
+}
+
+#ampleai-menu-close {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  font-family: 'Geist', 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+
+#ampleai-menu-close:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.06);
+}
+
+#ampleai-menu-close svg {
+  width: 14px;
+  height: 14px;
+}
+
+#ampleai-menu-logo-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Geist', 'TASA Orbiter', 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#ampleai-menu-book-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  color: #fff;
+  font-family: 'Geist', 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+#ampleai-menu-book-btn:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* ── Main content area ──────────────────────────────────── */
+#ampleai-menu-body {
+  position: absolute;
+  top: 72px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ── LEFT: Giant nav links ─────────────────────────────── */
+#ampleai-menu-left {
+  border-right: 1px solid rgba(255,255,255,0.08);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Watermark BG text */
+#ampleai-menu-left::before {
+  content: 'AI';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'TASA Orbiter', 'Geist', sans-serif;
+  font-size: clamp(120px, 25vw, 280px);
+  font-weight: 800;
+  color: rgba(255,255,255,0.03);
+  letter-spacing: -0.05em;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+#ampleai-menu-links {
+  display: flex;
+  flex-direction: column;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.ampleai-menu-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  text-decoration: none;
+  color: rgba(255,255,255,0.35);
+  font-family: 'TASA Orbiter', 'Geist', 'Inter', sans-serif;
+  font-size: clamp(28px, 4.5vw, 60px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  transition: color 0.25s ease;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.ampleai-menu-link:first-child {
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.ampleai-menu-link:hover,
+.ampleai-menu-link.is-active {
+  color: #fff;
+}
+
+.ampleai-menu-link-arrow {
+  font-size: clamp(20px, 3vw, 36px);
+  opacity: 0;
+  transform: rotate(-45deg) translate(-4px, 4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+.ampleai-menu-link:hover .ampleai-menu-link-arrow {
+  opacity: 1;
+  transform: rotate(-45deg) translate(0, 0);
+}
+
+/* ── RIGHT: Info panel ─────────────────────────────────── */
+#ampleai-menu-right {
+  padding: 48px 48px 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#ampleai-menu-tagline {
+  margin-top: 24px;
+}
+
+#ampleai-menu-tagline h3 {
+  font-family: 'TASA Orbiter', 'Geist', sans-serif;
+  font-size: clamp(16px, 2vw, 24px);
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  max-width: 280px;
+}
+
+#ampleai-menu-globe {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#ampleai-menu-globe span {
+  font-family: 'Geist', monospace;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4) !important;
+  letter-spacing: 0.04em;
+}
+
+#ampleai-menu-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: auto;
+}
+
+.ampleai-menu-info-block h4 {
+  font-family: 'Geist', 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.ampleai-menu-info-block p {
+  font-family: 'Geist', 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+}
+
+.ampleai-menu-info-block a {
+  font-family: 'Geist', 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  display: block;
+  margin-top: 4px;
+  transition: opacity 0.2s;
+}
+
+.ampleai-menu-info-block a:hover {
+  opacity: 0.7;
+}
+
+/* ── Mobile ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  #ampleai-menu-topbar { padding: 0 20px; }
+  #ampleai-menu-logo-center { display: none; }
+
+  #ampleai-menu-body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    overflow-y: auto;
+  }
+
+  #ampleai-menu-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 0;
+  }
+
+  #ampleai-menu-links { padding: 0 20px; }
+
+  .ampleai-menu-link {
+    font-size: clamp(24px, 7vw, 40px);
+    padding: 14px 0;
+  }
+
+  #ampleai-menu-right {
+    padding: 32px 20px;
+  }
+
+  #ampleai-menu-info {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+
+
+.framer-zSbuN .blueprint-section-wrapper {
+  height: auto;
+  min-height: auto;
+  display: block;
+  position: relative;
+  overflow: visible;
+  padding: 0;
+  margin: 0;
+  background: var(--token-53ac5080-809d-430f-8c22-cd6ed2fb990c, rgb(13, 13, 13));
+}
+
+.showcase-outer-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.showcase-scroll-container {
+  position: relative;
+  width: 100%;
+  background: var(--token-53ac5080-809d-430f-8c22-cd6ed2fb990c, rgb(13, 13, 13));
+  overflow: hidden !important;
+}
+
+/* ── Light Refraction Beam Flare ── */
+.showcase-bg-beam {
+  position: absolute;
+  top: -100px;
+  right: -220px;
+  width: 1250px;
+  height: 350px;
+  background-image: url('https://framerusercontent.com/images/Rm9MgzczWnTc9jYB5lgdVxdMXA.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right top;
+  opacity: 0.8 !important;
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform, opacity;
+  mix-blend-mode: screen !important;
+  filter: brightness(1.25) contrast(1.1) drop-shadow(0 0 40px rgba(0, 153, 255, 0.45)) !important;
+  animation: showcaseBeamDrift 16s ease-in-out infinite alternate;
+}
+
+/* Floating Gradient Mesh Blobs */
+.showcase-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(160px);
+  opacity: 0.22 !important;
+  mix-blend-mode: screen;
+  will-change: transform;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.blob-blue {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(0, 153, 255, 0.85) 0%, rgba(0, 153, 255, 0) 70%);
+  top: -100px;
+  right: -100px;
+  animation: showcaseBlobFloat1 22s ease-in-out infinite alternate;
+}
+
+.blob-purple {
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(179, 102, 255, 0.65) 0%, rgba(179, 102, 255, 0) 70%);
+  bottom: -200px;
+  left: -150px;
+  animation: showcaseBlobFloat2 28s ease-in-out infinite alternate;
+}
+
+@keyframes showcaseBlobFloat1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-100px, 50px) scale(1.1);
+  }
+  100% {
+    transform: translate(-50px, -30px) scale(0.9);
+  }
+}
+
+@keyframes showcaseBlobFloat2 {
+  0% {
+    transform: translate(0, 0) scale(0.9);
+  }
+  50% {
+    transform: translate(80px, -80px) scale(1.15);
+  }
+  100% {
+    transform: translate(-30px, 40px) scale(1);
+  }
+}
+
+@keyframes showcaseBeamDrift {
+  0% {
+    opacity: 0.50 !important;
+    transform: scale(1.02) translate(-20px, -10px) rotate(-1.5deg);
+  }
+  100% {
+    opacity: 0.75 !important;
+    transform: scale(0.98) translate(20px, 10px) rotate(1.5deg);
+  }
+}
+
+@keyframes statsBeamDrift {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 0.65 !important;
+  }
+  50% {
+    transform: translateY(-12px) scale(1.04) rotate(0.4deg);
+    opacity: 0.85 !important;
+  }
+  100% {
+    transform: translateY(6px) scale(0.96) rotate(-0.4deg);
+    opacity: 0.65 !important;
+  }
+}
+
+.showcase-sticky-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  padding: 0 8%;
+  box-sizing: border-box;
+  gap: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Left column steps */
+.showcase-left-col {
+  flex: 0 0 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  z-index: 3;
+}
+
+.showcase-badge {
+  font-family: "Geist", "Geist Placeholder", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--token-fa1b40c0-dfa2-4438-b701-cba20c6fbe72, rgb(163, 163, 163));
+  text-transform: uppercase;
+}
+
+.showcase-title {
+  font-family: "TASA Orbiter", "TASA Orbiter Placeholder", sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.showcase-timeline-container {
+  position: relative;
+  padding-left: 36px;
+  margin-top: 16px;
+}
+
+.showcase-timeline-line {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.showcase-timeline-dot {
+  position: absolute;
+  left: -4px;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 153, 255, 0.8), 0 0 6px rgba(0, 153, 255, 0.4);
+  z-index: 5;
+}
+
+.showcase-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.showcase-step-item {
+  opacity: 0.25;
+  transition: opacity 0.4s ease;
+}
+
+.showcase-step-item.active {
+  opacity: 1;
+}
+
+.showcase-step-num {
+  font-family: "TASA Orbiter", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.showcase-step-title {
+  font-family: "TASA Orbiter", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.showcase-step-desc {
+  font-family: "Geist", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--token-fa1b40c0-dfa2-4438-b701-cba20c6fbe72, rgb(163, 163, 163));
+  margin: 8px 0 0 0;
+  display: none;
+}
+
+.showcase-step-item.active .showcase-step-desc {
+  display: block;
+}
+
+/* Right column sticky card */
+.showcase-right-col {
+  flex: 0 0 45%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 3;
+}
+
+.showcase-canvas-card {
+  width: 100%;
+  aspect-ratio: 1.25;
+  background: rgba(255, 255, 255, 0.02) !important;
+  backdrop-filter: blur(32px) !important;
+  -webkit-backdrop-filter: blur(32px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 24px !important;
+  position: relative;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 
+    0 30px 70px rgba(0, 0, 0, 0.65), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0 50px rgba(0, 153, 255, 0.01) !important;
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.showcase-canvas-card:hover {
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 
+    0 35px 80px rgba(0, 0, 0, 0.75), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 0 60px rgba(0, 153, 255, 0.03) !important;
+}
+
+.showcase-panel {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+  bottom: 60px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.showcase-panel.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mockup Headers */
+.mockup-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mockup-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.mockup-dot.red { background: rgba(255, 255, 255, 0.15); }
+.mockup-dot.yellow { background: rgba(255, 255, 255, 0.15); }
+.mockup-dot.green { background: rgba(255, 255, 255, 0.15); }
+
+.mockup-title {
+  margin-left: 8px;
+  font-family: "Geist Mono", sans-serif;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.05em;
+}
+
+.mockup-body {
+  flex-grow: 1;
+  padding-top: 20px;
+  font-family: "Geist", sans-serif;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Panel 1: Code Logs */
+.code-log {
+  font-family: "Geist Mono", monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  gap: 8px;
+}
+
+.code-log p {
+  margin: 0;
+}
+
+.log-run { color: #888888; }
+.log-info { color: rgba(255, 255, 255, 0.6); }
+.log-success { color: #ffffff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.15); }
+
+/* Panel 2: Voice body with pulse waveform */
+.voice-body {
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.voice-status {
+  font-family: "TASA Orbiter", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #0099ff;
+  text-shadow: 0 0 10px rgba(0, 153, 255, 0.4);
+}
+
+.voice-avatar-container {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.voice-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+}
+
+.voice-waveform {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+}
+
+.voice-waveform span {
+  display: block;
+  width: 3px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  animation: pulse-wave 1.2s ease-in-out infinite;
+}
+
+.voice-waveform .bar-1 { animation-delay: 0.1s; }
+.voice-waveform .bar-2 { animation-delay: 0.3s; }
+.voice-waveform .bar-3 { animation-delay: 0.5s; height: 16px; }
+.voice-waveform .bar-4 { animation-delay: 0.2s; height: 22px; }
+.voice-waveform .bar-5 { animation-delay: 0.4s; height: 14px; }
+.voice-waveform .bar-6 { animation-delay: 0.6s; }
+.voice-waveform .bar-7 { animation-delay: 0.15s; }
+
+@keyframes pulse-wave {
+  0%, 100% { transform: scaleY(1); background: rgba(255, 255, 255, 0.3); }
+  50% { transform: scaleY(2.2); background: rgba(255, 255, 255, 0.85); }
+}
+
+/* Panel 3: Nodes Flow */
+.nodes-body {
+  justify-content: center;
+  align-items: center;
+}
+
+.node-graph {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.node-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-family: "TASA Orbiter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.node-box.active {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
+}
+
+.node-line {
+  flex-grow: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+
+.node-dot {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px #ffffff;
+  animation: node-flow-anim 2s linear infinite;
+}
+
+.node-dot.delay-1 {
+  animation-delay: 1s;
+}
+
+@keyframes node-flow-anim {
+  0% { left: 0%; opacity: 0; }
+  10%, 90% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+/* Panel 4: Docs body */
+.doc-body {
+  justify-content: center;
+  gap: 20px;
+}
+
+.doc-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.doc-h {
+  font-family: "TASA Orbiter", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.doc-t {
+  font-family: "Geist", sans-serif;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  padding-left: 14px;
+  line-height: 1.4;
+}
+
+/* Panel 5: CTA Dashboard */
+.cta-body {
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.cta-heading {
+  font-family: "TASA Orbiter", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.cta-sub {
+  font-family: "Geist", sans-serif;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  max-width: 80%;
+}
+
+.blueprint-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: var(--token-53ac5080-809d-430f-8c22-cd6ed2fb990c, rgb(13, 13, 13));
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-family: "Geist", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+  margin-top: 10px;
+}
+
+.blueprint-btn:hover {
+  background: #f0f0f0;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Indicator dots */
+.showcase-dots {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.showcase-dot {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.showcase-dot.active {
+  background-color: #ffffff;
+  transform: scale(1.2);
+}
+
+/* Responsive Scaling: Grid collapses on smaller screen viewports */
+@media (max-width: 1024px) {
+  .showcase-sticky-wrapper {
+    flex-direction: column;
+    height: auto !important;
+    padding: 80px 32px;
+    gap: 48px;
+  }
+  
+  .showcase-left-col {
+    width: 100%;
+  }
+  
+  .showcase-title {
+    font-size: 38px;
+  }
+  
+  .showcase-timeline-container {
+    padding-left: 0;
+  }
+  
+  .showcase-timeline-line {
+    display: none;
+  }
+  
+  .showcase-step-item {
+    opacity: 1;
+    margin-bottom: 24px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+  
+  .showcase-step-desc {
+    display: block !important;
+  }
+  
+  .showcase-right-col {
+    display: none; /* Hide visual canvas on small screens, fallback is the text cards */
+  }
+}
+
+@media (max-width: 640px) {
+  .showcase-sticky-wrapper {
+    padding: 60px 20px;
+  }
+  
+  .showcase-title {
+    font-size: 32px;
+  }
+  
+  .showcase-step-item {
+    padding: 16px 20px;
+  }
+}
+
+/* Hover: image blur only — no section pop, no card scale */
+a[href*="case-studies/"] {
+  isolation: isolate !important;
+  /* Prevent the whole card from lifting on hover */
+  transform: none !important;
+  transition: none !important;
+}
+
+a[href*="case-studies/"] [data-framer-background-image-wrapper] img[alt="Case Image"] {
+  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: filter !important;
+}
+
+a[href*="case-studies/"]:hover [data-framer-background-image-wrapper] img[alt="Case Image"] {
+  filter: blur(6px) brightness(0.85) !important;
+  transform: none !important;
+}
+
+/* Disable transitions on process cards animated via GSAP to prevent browser transitions stutter */
+.framer-9hd1tq-container .framer-RkBmQ,
+.framer-sb1e2m-container .framer-RkBmQ,
+.framer-1qzupzc-container .framer-RkBmQ,
+.framer-sc5l4v-container .framer-RkBmQ {
+  transition: none !important;
+}
+
+
+
+/* ══════════════════════════════════════════════════════════════
+   MORE EXAMPLE PROJECTS (CASES) SECTION - Layout Alignment Fixes
+   ══════════════════════════════════════════════════════════════ */
+@media (min-width: 1200px) {
+  /* Prevent clipping of the folder graphic by forcing section min-height and overflow: visible */
+  [data-framer-name="Cases"] .framer-Pnv0Q.framer-1fz07ii {
+    min-height: 580px !important;
+  }
+  
+  [data-framer-name="Cases"] .framer-15u2zv3 {
+    padding: 40px 0 20px !important; /* Reduce excessive desktop top/bottom padding */
+    overflow: visible !important;
+  }
+
+  [data-framer-name="Cases"] .framer-15sq5d {
+    padding: 40px 30px 20px !important; /* Reduce excessive desktop padding around folder */
+    overflow: visible !important;
+  }
+
+  /* Center the AmpletechAI watermark logo absolutely within the row container.
+     This stops it from pushing and squeezing the "Since" vertical text container to the border. */
+  [data-framer-name="Cases"] .framer-se2gqr {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    z-index: 1 !important;
+  }
+
+  /* Align the "Since" vertical text using the parent's padding, ensuring it doesn't touch the border */
+  [data-framer-name="Cases"] .framer-vda2au {
+    z-index: 2 !important;
+    margin-left: 0 !important; /* Keeps it naturally in the padded area */
+  }
+
+  /* ── Cases Section Row Hover States ── */
+  [data-framer-name="Cases"] .framer-Pnv0Q a[href*="/case-studies/"] {
+    transition: background-color 0.35s ease, color 0.35s ease !important;
+  }
+
+  [data-framer-name="Cases"] .framer-Pnv0Q a[href*="/case-studies/"]:hover {
+    background-color: #080808 !important; /* Matte black background on hover */
+  }
+
+  [data-framer-name="Cases"] .framer-Pnv0Q a[href*="/case-studies/"]:hover h2,
+  [data-framer-name="Cases"] .framer-Pnv0Q a[href*="/case-studies/"]:hover p,
+  [data-framer-name="Cases"] .framer-Pnv0Q a[href*="/case-studies/"]:hover span {
+    color: #ffffff !important;
+    --framer-text-color: #ffffff !important;
+    --extracted-r6o4lv: #ffffff !important;
+    --extracted-1of0zx5: #ffffff !important;
+  }
+
+  /* Invert the arrow icon inside the hovered row to make it white */
+  [data-framer-name="Cases"] .framer-Pnv0Q a[href*="/case-studies/"]:hover [data-framer-name="Image"] img {
+    filter: invert(1) brightness(10) !important;
+  }
+
+  /* ── Folder Card Animations using CSS :has() ── */
+
+  /* Default state (nothing hovered, or row 1 hovered): Show Case 01, hide others */
+  [data-framer-name="Cases"] .framer-1on0omz {
+    opacity: 1 !important;
+    transform: translateY(0) rotate(9deg) scale(1) !important;
+    z-index: 5 !important;
+    transition: opacity 0.5s var(--ease-premium), transform 0.5s var(--ease-premium) !important;
+  }
+
+  [data-framer-name="Cases"] .framer-gec9hg,
+  [data-framer-name="Cases"] .framer-17fvr9n {
+    opacity: 0 !important;
+    transform: translateY(40px) rotate(4deg) scale(0.9) !important;
+    pointer-events: none !important;
+    z-index: 3 !important;
+    transition: opacity 0.5s var(--ease-premium), transform 0.5s var(--ease-premium) !important;
+  }
+
+  /* If Row 2 (Real Estate Lead Automation) is hovered: show Case 02, hide Case 01 and Case 03 */
+  .framer-Pnv0Q:has(a[href*="real-estate-lead-automation"]:hover) .framer-1on0omz {
+    opacity: 0 !important;
+    transform: translateY(40px) rotate(4deg) scale(0.9) !important;
+  }
+  .framer-Pnv0Q:has(a[href*="real-estate-lead-automation"]:hover) .framer-gec9hg {
+    opacity: 1 !important;
+    transform: translateY(0) rotate(9deg) scale(1) !important;
+    z-index: 6 !important;
+  }
+
+  /* If Row 3 (Ecommerce Support Assistant) is hovered: show Case 03, hide Case 01 and Case 02 */
+  .framer-Pnv0Q:has(a[href*="ecommerce-support-assistant"]:hover) .framer-1on0omz {
+    opacity: 0 !important;
+    transform: translateY(40px) rotate(4deg) scale(0.9) !important;
+  }
+  .framer-Pnv0Q:has(a[href*="ecommerce-support-assistant"]:hover) .framer-17fvr9n {
+    opacity: 1 !important;
+    transform: translateY(0) rotate(9deg) scale(1) !important;
+    z-index: 6 !important;
+  }
+}
+
+/* Custom spotlight glow rules (scoped strictly to small cards and excluding full-page section wrappers) */
+.amp-card-hover {
+  position: relative;
+  transition: border-color 0.4s var(--ease-premium), 
+              transform 0.4s var(--ease-premium), 
+              box-shadow 0.4s var(--ease-premium) !important;
+}
+
+.amp-card-hover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    380px circle at var(--mouse-x, -9999px) var(--mouse-y, -9999px),
+    rgba(255, 255, 255, 0.04) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.amp-card-hover:hover::before {
+  opacity: 1;
+}
+
+.amp-card-hover:hover {
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+/* Clickable cards: border glow only — no lift/translate/scale */
+.amp-card-hover.amp-clickable:hover {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 8px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Ensure the custom Services accordion containers and panels never hover lift/translate */
+.as-wrapper,
+.as-track,
+.as-panel {
+  transform: none !important;
+}
+
+/* Premium Shimmering Titles & Badges */
+@keyframes textShimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.showcase-title,
+.showcase-badge {
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #ffffff 45%,
+    rgba(0, 153, 255, 0.7) 50%,
+    #ffffff 55%,
+    #ffffff 100%
+  ) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: textShimmer 7s infinite linear !important;
+  display: inline-block;
+}
+
+/* ── Premium Button Hover Interactions ── */
+
+/* White Buttons (Primary) */
+.framer-u2z7Q, .blueprint-btn {
+  transition: transform 0.3s var(--ease-premium), 
+              letter-spacing 0.3s var(--ease-premium),
+              box-shadow 0.3s var(--ease-premium), 
+              background 0.3s ease !important;
+}
+
+.framer-u2z7Q:hover, .blueprint-btn:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+  letter-spacing: 0.02em !important;
+  box-shadow: 
+    0 8px 24px rgba(255, 255, 255, 0.15),
+    0 0 15px rgba(0, 153, 255, 0.25) !important;
+}
+
+.framer-u2z7Q:hover svg, .blueprint-btn:hover svg {
+  transform: translateX(4px) !important;
+  transition: transform 0.3s var(--ease-premium) !important;
+}
+
+/* Dark/Outline Buttons */
+.framer-2z2Mj, #ampleai-menu-book-btn, .as-cta-btn {
+  transition: transform 0.3s var(--ease-premium), 
+              border-color 0.3s ease,
+              box-shadow 0.3s var(--ease-premium) !important;
+}
+
+.framer-2z2Mj:hover, #ampleai-menu-book-btn:hover, .as-cta-btn:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.5),
+    0 0 12px rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Case study row list — subtle hover, no pop/lift */
+[data-framer-name="Cases"] .framer-Pnv0Q a[href*="case-studies/"] {
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.35s var(--ease-premium) !important;
+}
+
+/* No ::after accent bar and no image transform on hover */
+[data-framer-name="Cases"] .framer-Pnv0Q a[href*="case-studies/"]::after {
+  display: none !important;
+}
+
+[data-framer-name="Cases"] .framer-Pnv0Q a[href*="case-studies/"]:hover [data-framer-name="Image"] img {
+  transform: none !important;
+}
+
+/* Hide Framer badge watermark globally */
+#__framer-badge-container,
+.__framer-badge,
+a[href*="framer.com"] {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+/* ──────────────────────────────────────────────────────────
+   AMPLEAI ANIMATIONS v11 (Restored)
+   IntersectionObserver triggers .amp-visible class.
+   Only opacity + scale — NO translateY (clipped by overflow:clip).
+   ────────────────────────────────────────────────────────── */
+
+/* ── Base hidden state ─────────────────────────────────── */
+.amp-fade {
+  opacity: 0 !important;
+  transform: scale(0.97) !important;
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: opacity, transform;
+}
+
+/* ── Visible state — triggered by IntersectionObserver ─── */
+.amp-fade.amp-visible {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+/* ── Step tiles: slightly bigger scale for more drama ─── */
+section[data-framer-name="Step"].amp-fade {
+  opacity: 0 !important;
+  transform: scale(0.94) !important;
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+section[data-framer-name="Step"].amp-visible {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+/* ── Cards — stagger delay comes from inline style ─────── */
+[data-border="true"].amp-fade {
+  transition-duration: 0.7s !important;
+}
+
+/* ── Headings — slightly slower for drama ──────────────── */
+h2.amp-fade,
+h3.amp-fade {
+  transition-duration: 0.9s !important;
+}
+
+/* ── Before JS loads, everything visible (no FOUC) ─────── */
+body:not(.js-loaded) .amp-fade {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ──────────────────────────────────────────────────────────
+   AMPLEAI PROCESS SECTION OVERLAPPING GRID LAYOUT (Desktop)
+   ────────────────────────────────────────────────────────── */
+@media (min-width: 1200px) {
+  /* Override overflow: clip on ancestors to allow sticky cards to stick */
+  .framer-hdXpx,
+  .framer-zSbuN,
+  .framer-uj2855,
+  .framer-k3gym4,
+  .framer-8zt6fp {
+    overflow: visible !important;
+  }
+
+  .framer-zSbuN .framer-ly6508 {
+    grid-template-columns: repeat(2, minmax(50px, 1fr)) !important;
+    grid-template-rows: 1fr !important;
+    grid-auto-rows: unset !important;
+    /* Preserve original min-height (150vh) so it doesn't collapse and overlap next section */
+    position: relative !important;
+  }
+
+  /* Override the wrapper .ssr-variant display from contents to flex to allow sticky positioning */
+  .framer-zSbuN .framer-ly6508 > .ssr-variant:nth-child(1),
+  .framer-zSbuN .framer-ly6508 > .ssr-variant:nth-child(3),
+  .framer-zSbuN .framer-ly6508 > .ssr-variant:nth-child(5),
+  .framer-zSbuN .framer-ly6508 > .ssr-variant:nth-child(7) {
+    display: flex !important;
+    position: sticky !important;
+    top: 270px !important;
+    grid-row: 1 !important;
+    place-self: start !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .framer-zSbuN .framer-ly6508 > .ssr-variant:nth-child(1) {
+    grid-column: 1 !important;
+    z-index: 1 !important;
+  }
+  .framer-zSbuN .framer-ly6508 > .ssr-variant:nth-child(3) {
+    grid-column: 2 !important;
+    z-index: 1 !important;
+  }
+  .framer-zSbuN .framer-ly6508 > .ssr-variant:nth-child(5) {
+    grid-column: 1 !important;
+    z-index: 2 !important;
+  }
+  .framer-zSbuN .framer-ly6508 > .ssr-variant:nth-child(7) {
+    grid-column: 2 !important;
+    z-index: 2 !important;
+  }
+
+  .framer-zSbuN .framer-9hd1tq-container,
+  .framer-zSbuN .framer-sb1e2m-container,
+  .framer-zSbuN .framer-1qzupzc-container,
+  .framer-zSbuN .framer-sc5l4v-container {
+    position: relative !important;
+    top: auto !important;
+    height: 400px !important;
+    width: 100% !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   PRICING PLANS CLEANUP
+   ───────────────────────────────────────────────────────── */
+
+/* Remove monthly/yearly toggle buttons */
+[data-framer-name="Toggle"],
+#pricing [data-framer-name="Toggle"],
+[data-framer-name*="Pricing" i] [data-framer-name="Toggle"] {
+  display: none !important;
+}
+
+/* Remove the extra unused bullet points in starter build and full implementation */
+[data-framer-name^="SM -"]:has(p:empty),
+[data-framer-name^="SM -"]:has(p.framer-text:empty) {
+  display: none !important;
+}
+
+/* ─────────────────────────────────────────────────────────
+   HAMBURGER MENU ICON CLEANUP & CENTERING
+   ───────────────────────────────────────────────────────── */
+
+/* Perfectly align menu button plus icon and text globally across all pages */
+.framer-9uotoe {
+  position: relative !important;
+  width: 20px !important;
+  height: 20px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  top: auto !important;
+  transform: none !important;
+  margin-right: 8px !important;
+}
+
+/* Hide the 5 separate squares which cause sub-pixel crookedness */
+.framer-9uotoe > div {
+  display: none !important;
+}
+
+/* Draw a perfect, straight, centered plus symbol */
+.framer-9uotoe::before,
+.framer-9uotoe::after {
+  content: "" !important;
+  position: absolute !important;
+  background-color: currentColor !important;
+  border-radius: 0px !important;
+}
+
+/* Vertical bar: 2px wide, 16px high */
+.framer-9uotoe::before {
+  width: 2px !important;
+  height: 16px !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* Horizontal bar: 16px wide, 2px high */
+.framer-9uotoe::after {
+  width: 16px !important;
+  height: 2px !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* ─────────────────────────────────────────────────────────
+   MOVED STATS SECTION STYLING & OVERFLOW SAFETY
+   ───────────────────────────────────────────────────────── */
+
+/* Ensure the absolute-positioned gradient beam does not cause page horizontal scrollbars */
+[data-framer-name="Services"] {
+  background-color: #f5f5f5 !important;
+  background: #f5f5f5 !important;
+  color: #0d0d0d !important;
+  z-index: 5 !important;
+  overflow: visible !important;
+}
+
+/* Override Framer native styles for the stats container when moved below accordion */
+.framer-1v6c2xt {
+  max-width: 1320px !important;
+  margin: 120px auto 0 !important;
+  position: relative !important;
+  z-index: 2 !important;
+  overflow: visible !important;
+  display: flex !important;
+  background: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+
+/* Position and size the absolute gradient beam horizontally centered and within view bounds */
+.framer-bt8dal {
+  position: absolute !important;
+  bottom: -120px !important;
+  right: -100px !important;
+  left: auto !important;
+  transform: none !important;
+  width: 1080px !important;
+  height: auto !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  mix-blend-mode: screen !important;
+  opacity: 0.8 !important;
+  filter: brightness(1.2) contrast(1.1) drop-shadow(0 0 35px rgba(0, 153, 255, 0.55)) !important;
+  animation: statsBeamDrift 12s ease-in-out infinite alternate !important;
+}
+
+@media (max-width: 1199.98px) {
+  .framer-1v6c2xt {
+    margin: 40px auto 0 !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 30px !important;
+    width: 100% !important;
+    padding: 0 20px !important;
+  }
+  .framer-1v6c2xt [data-framer-name="Left"] {
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  .framer-1v6c2xt [data-framer-name="Right"] {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* Fix CTA button text color in stats container (boosting specificity to win over general Services override) */
+[data-framer-name="Services"] .framer-1v6c2xt a span,
+[data-framer-name="Services"] .framer-1v6c2xt span,
+[data-framer-name="Services"] .framer-1v6c2xt a * {
+  --framer-text-color: #f1f1f1 !important;
+  color: #f1f1f1 !important;
+}
+
+/* Hide the cut-off vertical "Featured" badges on Case Study cards */
+[data-framer-name="Featured"] {
+  display: none !important;
+}
+
+/* Custom styled counters to override broken Framer animations */
+.amp-counter-fixed {
+  font-family: "TASA Orbiter", "TASA Orbiter Placeholder", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 58px !important;
+  color: #ffffff !important;
+  letter-spacing: -1px !important;
+  line-height: 0.8em !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (max-width: 1199px) {
+  .amp-counter-fixed {
+    font-size: 40px !important;
+  }
+}
+
+/* Hide Nexter and other client logos inside the Case Studies pages */
+.framer-hdXpx [data-framer-name="Logo"] {
+  display: none !important;
+}
+
+/* Remove black borders/shadows/outlines from tilted cards on hover */
+[data-framer-name="Cases"] [data-framer-name="Thumbnail"],
+[data-framer-name="Cases"] [data-framer-name="Thumbnail"] *,
+[data-framer-name="Cases"] [data-framer-name="Default Image"],
+[data-framer-name="Cases"] [data-framer-name="Default Image"] *,
+[data-framer-name="Cases"] [data-framer-name="Front"],
+[data-framer-name="Cases"] [data-framer-name="Front"] *,
+[data-framer-name="Cases"] img {
+  border: none !important;
+  border-width: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Style fixed counters smaller inside case study pages */
+.framer-hdXpx .amp-counter-fixed {
+  font-size: 42px !important;
+}
+@media (max-width: 1199px) {
+  .framer-hdXpx .amp-counter-fixed {
+    font-size: 30px !important;
+  }
+}
+
+/* Hide honeypot spam protection fields globally */
+input[tabindex="-1"][aria-hidden="true"],
+input[style*="position:absolute"] {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+}
+
+/* ─────────────────────────────────────────────────────────
+   HERO SECONDARY BUTTON: DISCOVER OUR STORY
+   ───────────────────────────────────────────────────────── */
+.hero-secondary-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px 36px !important;
+  font-family: "Geist", "Geist Placeholder", sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 40px !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+.hero-secondary-btn:hover {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 35px rgba(255, 255, 255, 0.05) !important;
+}
+
+.hero-secondary-btn:active {
+  transform: translateY(0) !important;
+}
+
+/* Responsive adjustments for hero buttons list */
+@media (max-width: 809px) {
+  .hero-secondary-btn {
+    width: 100% !important;
+    padding: 14px 28px !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   CLIENTS LOGO VISIBILITY FIX
+   ───────────────────────────────────────────────────────── */
+.framer-x5sepb * {
+  visibility: visible !important;
+}
+.framer-x5sepb .framer-6i6anz,
+.framer-x5sepb .framer-10bt3ky {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ─────────────────────────────────────────────────────────
+   HIDE HERO LOCK ICON
+   ───────────────────────────────────────────────────────── */
+[data-framer-name="Lock"] {
+  display: none !important;
+}
+
+/* ─────────────────────────────────────────────────────────
+   TEAM MEMBER CARDS — SHOW REAL PHOTOS WITH STYLISH OVERLAY
+   ───────────────────────────────────────────────────────── */
+
+/* ── Card photo container: dark, centered, tilt-ready ── */
+[data-framer-name="Team"] [data-framer-name="Thumbnail"] > div,
+.framer-xvkusw {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 12px !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  background: #060606 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 220px !important;
+  transform-style: preserve-3d !important;
+  transition: transform 0.12s ease-out, box-shadow 0.12s ease-out !important;
+  will-change: transform !important;
+}
+
+/* ── Glowing bloom behind initials ── */
+[data-framer-name="Team"] [data-framer-name="Thumbnail"] > div::before,
+.framer-xvkusw::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  width: 160px !important;
+  height: 160px !important;
+  border-radius: 50% !important;
+  background: var(--member-color, #0099ff) !important;
+  filter: blur(60px) !important;
+  opacity: 0.18 !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 0 !important;
+  animation: memberGlow 4s ease-in-out infinite alternate !important;
+}
+
+/* ── No bottom vignette ── */
+[data-framer-name="Team"] [data-framer-name="Thumbnail"] > div::after,
+.framer-xvkusw::after {
+  display: none !important;
+}
+
+/* ── Dot grid texture overlay ── */
+.amp-member-initials-wrap {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 24px 24px;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ── Cursor spotlight overlay (position tracked by JS) ── */
+.amp-member-spotlight {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    220px circle at var(--mx, -999px) var(--my, -999px),
+    rgba(255, 255, 255, 0.07) 0%,
+    transparent 70%
+  );
+  z-index: 3;
+  pointer-events: none;
+  transition: background 0.05s linear;
+}
+
+/* ── Glowing initials text ── */
+.amp-member-initials {
+  position: relative;
+  z-index: 2;
+  font-family: 'Geist', 'Inter', 'SF Pro Display', sans-serif;
+  font-size: clamp(60px, 8vw, 96px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  user-select: none;
+  background: linear-gradient(
+    140deg,
+    var(--member-color, #0099ff) 0%,
+    rgba(255, 255, 255, 0.95) 55%,
+    var(--member-color, #0099ff) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 18px var(--member-color, #0099ff))
+          drop-shadow(0 0 40px var(--member-color, #0099ff));
+  animation: memberGlow 4s ease-in-out infinite alternate;
+  transition: transform 0.12s ease-out, filter 0.12s ease-out;
+}
+
+/* ── Initials scale up slightly on card hover ── */
+[data-framer-name="Thumbnail"]:hover .amp-member-initials {
+  filter: drop-shadow(0 0 28px var(--member-color, #0099ff))
+          drop-shadow(0 0 60px var(--member-color, #0099ff)) !important;
+  transform: scale(1.05) !important;
+}
+
+@keyframes memberGlow {
+  0%   { opacity: 0.75; }
+  100% { opacity: 1; }
+}
+
+/* ── Center Who We Are mannequin image ── */
+.framer-powfrx,
+.framer-f0s638,
+.framer-f0s638 [data-framer-background-image-wrapper="true"],
+.framer-f0s638 img,
+[data-framer-name="Center"],
+[data-framer-name="Center"] .framer-f0s638,
+[data-framer-name="Center"] [data-framer-background-image-wrapper="true"],
+[data-framer-name="Center"] img[src*="who-we-are"] {
+  object-position: center !important;
+  object-fit: cover !important;
+  transform: none !important;
+}
+
+/* ── Text Reveal scroll-linked highlight ── */
+.reveal-paragraph {
+  font-family: 'PP Neue Montreal', 'Neue Montreal', 'Geist', sans-serif;
+  font-weight: 700;
+  line-height: 1.15;
+  text-transform: uppercase;
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+@media (min-width: 1200px) {
+  .reveal-paragraph {
+    font-size: 58px;
+    gap: 0 16px;
+  }
+}
+@media (min-width: 810px) and (max-width: 1199.98px) {
+  .reveal-paragraph {
+    font-size: 38px;
+    gap: 0 10px;
+  }
+}
+@media (max-width: 809.98px) {
+  .reveal-paragraph {
+    font-size: 24px;
+    gap: 0 6px;
+  }
+}
+
+.reveal-word {
+  color: rgba(255, 255, 255, 0.18);
+  display: inline-block;
+}
+
+/* ── Stats Section Counters ── */
+.framer-cmyx3u-container {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.amp-counter-fixed {
+  display: flex !important;
+  align-items: baseline !important;
+  justify-content: flex-start !important;
+  font-family: "TASA Orbiter", "TASA Orbiter Placeholder", sans-serif !important;
+  font-size: clamp(54px, 5.5vw, 76px) !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  letter-spacing: -0.02em !important;
+  color: #0d0d0d !important;
+}
+
+.amp-counter-fixed span {
+  color: #0d0d0d !important;
+}
+
+.amp-counter-fixed .amp-counter-unit {
+  color: #707070 !important;
+  font-weight: 500 !important;
+  font-size: 0.85em !important;
+  margin-left: 0.05em !important;
+}
+
+/* Stats labels color (muted dark gray) */
+[data-framer-name="Services"] .framer-1v6c2xt [data-framer-name="Right"] p {
+  --framer-text-color: #707070 !important;
+  color: #707070 !important;
+}
+
+/* Make stats numbers centered on mobile viewports */
+@media (max-width: 809.98px) {
+  .amp-counter-fixed {
+    text-align: center !important;
+    width: 100% !important;
+  }
+}
+
+/* ── Hide client logos on homepage featured card and case study detail pages ── */
+.framer-1k2h1lj,
+.framer-15plbf5 {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* ── Fix: ensure Framer SSR hidden classes stay hidden ── */
+@media (min-width: 1200px) {
+  .hidden-1r4r1nz,
+  .hidden-yaykkt {
+    display: none !important;
+  }
+}
+
+@media (min-width: 810px) and (max-width: 1199.98px) {
+  .hidden-1ms3zgx,
+  .hidden-1gkau1w {
+    display: none !important;
+  }
+}
+
+@media (max-width: 809.98px) {
+  .hidden-wqhfk6,
+  .hidden-et2n2z {
+    display: none !important;
+  }
+}
+
+/* ── Footer container: ensure it always renders above other sections and has solid background ── */
+div[class*="qba5n6-container"],
+.framer-qba5n6-container {
+  position: relative !important;
+  z-index: 10 !important;
+  background-color: var(--token-53ac5080-809d-430f-8c22-cd6ed2fb990c, rgb(13, 13, 13)) !important;
+}
+
+/* ── Case study detail page — prevent hero image from bleeding over footer ── */
+.framer-1lxzeft {
+  overflow: hidden !important;
+}
+
+
+/* --- SKELETON LOADING --- */
+.amp-skeleton-card {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--token-3ee0f1ea-bf0c-4338-a648-3fc779ce08bb, rgb(44, 44, 44)) !important;
+    border-color: var(--token-1a0abee7-397d-4863-a181-709f5463ebcd, rgba(255, 255, 255, 0.1)) !important;
+    pointer-events: none;
+    border-radius: inherit;
+    /* Ensure the card has a background to show the shimmer */
+}
+
+/* Hide children but keep layout space */
+.amp-skeleton-card > * {
+    opacity: 0 !important;
+}
+
+.amp-skeleton-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+    background-size: 200% 100%;
+    animation: amp-shimmer 1.5s infinite linear;
+    z-index: 10;
+    pointer-events: none;
+}
+
+@keyframes amp-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.amp-loaded {
+    animation: amp-fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes amp-fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
