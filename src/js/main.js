@@ -6,6 +6,87 @@
  */
 import '../styles/index.css';
 
+/* ─────────────────────────────────────────────────────────
+   GLOBAL IMAGE ERROR CORRUPTION INTERCEPTOR (SELF-HEALING)
+   ───────────────────────────────────────────────────────── */
+const FALLBACK_IMAGES = {
+    'case-study-dental.png': 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800',
+    'case-study-realestate.png': 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=80&w=800',
+    'case-study-ecommerce.png': 'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=800',
+    'nevis-avatar.png': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400',
+    'who-we-are.jpg': 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200',
+    'who-we-are.png': 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200',
+    'team-ava.png': 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400',
+    'team-ethan.png': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400',
+    'team-noah.png': 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400',
+    'team-sarah.png': 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400',
+    'team-liam.png': 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400',
+    'robotic-arm.png.jpeg': 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800'
+};
+
+function handleFailedImg(img) {
+    const src = img.src || '';
+    if (src.includes('/assets/')) {
+        const filename = src.split('/').pop().split('?')[0];
+        if (FALLBACK_IMAGES[filename]) {
+            console.log('[AmpleAI] Image corrupt/failed, loading uncorrupted fallback:', filename);
+            img.src = FALLBACK_IMAGES[filename];
+            img.srcset = '';
+            img.removeAttribute('srcset');
+        } else if (filename === 'lumothrive.jpg' || filename === 'lumothrive.png' || filename === 'lumothrive.svg') {
+            // Replaces the broken image with a crisp SVG logo icon
+            const svgEl = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svgEl.setAttribute("width", "40");
+            svgEl.setAttribute("height", "40");
+            svgEl.setAttribute("viewBox", "0 0 100 100");
+            svgEl.setAttribute("fill", "none");
+            svgEl.style.display = "block";
+            svgEl.style.flexShrink = "0";
+            
+            const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+            defs.innerHTML = `
+                <linearGradient id="silver-grad-lumo-fb" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFFFFF" />
+                    <stop offset="30%" stop-color="#E2E8F0" />
+                    <stop offset="70%" stop-color="#94A3B8" />
+                    <stop offset="100%" stop-color="#475569" />
+                </linearGradient>
+            `;
+            svgEl.appendChild(defs);
+            
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", "M 32 18 L 48 18 L 48 52 C 48 64 56 68 76 68 C 78 68 80 67 82 66 L 82 78 Q 70 82 58 82 C 38 82 32 72 32 52 Z");
+            path.setAttribute("fill", "url(#silver-grad-lumo-fb)");
+            svgEl.appendChild(path);
+            
+            img.replaceWith(svgEl);
+        }
+    }
+}
+
+// 1. Capture errors on load phase (crucial as it captures the event during error phase)
+window.addEventListener('error', function (e) {
+    const target = e.target;
+    if (target && target.tagName === 'IMG') {
+        handleFailedImg(target);
+    }
+}, true);
+
+// 2. Scan and patch existing elements on DOMReady and general interval
+function scanAndPatchAllImages() {
+    document.querySelectorAll('img').forEach(img => {
+        // If image has failed to load (naturalWidth/Height is 0) or has error state
+        if (img.src && (img.naturalWidth === 0 || (img.complete && img.naturalHeight === 0))) {
+            handleFailedImg(img);
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', scanAndPatchAllImages);
+window.addEventListener('load', scanAndPatchAllImages);
+// Periodic checking to handle deferred/hydrated images
+setInterval(scanAndPatchAllImages, 1000);
+
 const IMAGE_MAP = {
     'OR4te0XAqQp3f22sxMboTobp5w': '/assets/team-ethan.png',
     'RiB4JVDNfxz4HhK8vki0WzV5c8M': '/assets/team-ethan.png',
@@ -15,7 +96,9 @@ const IMAGE_MAP = {
     'dCtkpnoE7qEITkDuDvst22PaAOU': '/assets/team-noah.png',
     'Sg9QXajgT380oA1yHySylazfGs': '/assets/team-sarah.png',
     'nTPaXeQZ8UlpaJbZOVt7Cvmkjq0': '/assets/team-sarah.png',
-    'jWmFga0Em87djh62ANoLFTFZ7G4': '/assets/team-liam.png'
+    'jWmFga0Em87djh62ANoLFTFZ7G4': '/assets/team-liam.png',
+    'ErWYoaPZx0lwx3MzZ9fBi2yGRY': '/assets/who-we-are.png',
+    'p9GIEWvTcTTUhNjOIqhzovHNs': 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
 };
 
 const SECTION_MAP = {
@@ -1332,6 +1415,11 @@ function patchTestimonialsSection() {
             '#testimonials [data-framer-name="Testimonial 05"] { display:none !important; }',
             '#testimonials [data-framer-name^="Avatar 0"],',
             '#testimonials [name^="Avatar 0"] { display:none !important; }',
+            'div#main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > main:nth-of-type(1) > section#testimonials:nth-of-type(6) > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > img:nth-of-type(1) { width: 80px !important; height: 80px !important; margin-left: 0px !important; padding-left: 0px !important; margin-right: 0px !important; margin-top: -36px !important; margin-bottom: -26px !important; }',
+            'div#main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > main:nth-of-type(1) > section#testimonials:nth-of-type(6) > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > img:nth-of-type(1) { width: 60px !important; height: 60px !important; }',
+            'div#main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > main:nth-of-type(1) > section#testimonials:nth-of-type(6) > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) { height: 481px !important; width: 481px !important; }',
+            'div#main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > main:nth-of-type(1) > section#testimonials:nth-of-type(6) > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) { height: 400px !important; }',
+            'div#main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > main:nth-of-type(1) > section#testimonials:nth-of-type(6) > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1) { margin-left: -25px !important; margin-top: -11px !important; padding-top: 0px !important; padding-bottom: 0px !important; }',
         ].join('\n');
         document.head.appendChild(style);
     }
@@ -1353,33 +1441,63 @@ function patchTestimonialsSection() {
         });
 
         section.querySelectorAll('[data-framer-name="Testimonial 01"]').forEach(card => {
-            const avatarImg = card.querySelector('img[alt="Avatar"]') ||
-                              card.querySelector('[data-framer-name="Top"] img');
-            if (avatarImg) {
-                avatarImg.src = 'https://images.unsplash.com/photo-1546776310-eef45dd6d63c?auto=format&fit=crop&q=80&w=200';
-                avatarImg.srcset = '';
-                avatarImg.alt = 'Robotic arm avatar';
+            // Hide the default top avatar/logo blocks
+            const topBlock = card.querySelector('[data-framer-name="Top"]');
+            if (topBlock) {
+                topBlock.style.display = 'none';
             }
-
-            const logoImg = card.querySelector('img[alt="Logo"]') ||
-                            card.querySelector('[data-framer-name="Brand Logo"] img');
-            if (logoImg) {
-                logoImg.src = '/assets/lumothrive.png';
-                logoImg.srcset = '';
-                logoImg.alt = 'Lumothrive';
-                logoImg.style.objectFit = 'contain';
-                logoImg.style.filter = 'brightness(0) invert(1)';
-                const logoWrap = card.querySelector('[data-framer-name="Brand Logo"]');
-                if (logoWrap) {
-                    logoWrap.style.width = '175px';
-                    logoWrap.style.height = '31px';
-                    logoWrap.style.aspectRatio = 'unset';
+            
+            // Hide any default card images to prevent broken avatars, except our custom logo
+            card.querySelectorAll('img').forEach(img => {
+                if (!img.classList.contains('lumothrive-logo')) {
+                    img.style.display = 'none';
+                    if (img.parentElement && !img.parentElement.classList.contains('custom-lumothrive-header')) {
+                        img.parentElement.style.display = 'none';
+                    }
                 }
-            }
+            });
 
+            // Locate the quote text element
             const quoteEl = card.querySelector('p.framer-text') ||
                             card.querySelector('[data-framer-name="Bottom"] .framer-1w1whxo p') ||
                             card.querySelector('[data-framer-name="Bottom"] .framer-text');
+
+            // Ensure custom header exists and is updated inside the same wrapper as the quote
+            let brandHeader = card.querySelector('.custom-lumothrive-header');
+            if (!brandHeader) {
+                brandHeader = document.createElement('div');
+                brandHeader.className = 'custom-lumothrive-header';
+            }
+            
+            if (quoteEl && brandHeader.parentNode !== quoteEl.parentNode) {
+                quoteEl.parentNode.insertBefore(brandHeader, quoteEl);
+            } else if (!quoteEl && !brandHeader.parentNode) {
+                card.insertBefore(brandHeader, card.firstChild);
+            }
+            
+            // Set styles for the brand header to align beautifully inside the black container
+            brandHeader.style.display = 'flex';
+            brandHeader.style.flexDirection = 'column';
+            brandHeader.style.alignItems = 'center';
+            brandHeader.style.justifyContent = 'center';
+            brandHeader.style.gap = '10px';
+            brandHeader.style.marginBottom = '24px';
+            brandHeader.style.paddingBottom = '16px';
+            brandHeader.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+            brandHeader.style.width = '100%';
+
+            const starsHtml = Array(5).fill(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFC107" width="18" height="18" style="display:inline-block; margin: 0 2px; filter: drop-shadow(0px 2px 4px rgba(255, 193, 7, 0.2));"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`).join('');
+
+            brandHeader.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+                    <img src="/assets/lumothrive.svg" class="lumothrive-logo" style="display: block !important; width: 60px; height: 60px; object-fit: contain; filter: none !important;" alt="Lumothrive" />
+                    <span style="font-family: 'Space Grotesk', 'Geist', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 20px; font-weight: 800; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase;">LUMOTHRIVE</span>
+                </div>
+                <div style="display: flex; justify-content: center; align-items: center; margin-top: 2px;">
+                    ${starsHtml}
+                </div>
+            `;
+
             if (quoteEl) {
                 quoteEl.textContent = '\u201cThe AI consulting process in AmpletechAI was smooth and transparent. From strategy to implementation, every step was handled with real expertise and a focus on business outcomes.\u201d';
             }
